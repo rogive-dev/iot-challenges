@@ -1,0 +1,12 @@
+List of parameters
+------------------------------------------
+device_type:4
+device_id:4
+device_longitude:-74.06787157058716
+device_latitude:4.602936432470797
+device_elevation:0.0
+device_radius:0.0
+device_hide:0
+device_draw_battery:false
+device_sensor_unit_radius:100.0
+device_script_file_name:nodo_base.csc

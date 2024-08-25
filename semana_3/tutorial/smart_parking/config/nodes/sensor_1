@@ -1,0 +1,13 @@
+List of parameters
+------------------------------------------
+device_type:1
+device_id:1
+device_longitude:-74.06728148460388
+device_latitude:4.602294778199882
+device_elevation:0.0
+device_radius:0.0
+device_hide:0
+device_pic:0
+device_draw_battery:false
+device_sensor_unit_radius:100.0
+device_script_file_name:nodo_parqueadero.csc
