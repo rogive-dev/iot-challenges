@@ -563,6 +563,42 @@ def get_map_json(request, **kwargs):
 
     return JsonResponse(data_result)
 
+def get_city_info(request, **params):
+    city_id = params.get("cityId", 1)
+    measurement_id = request.GET.get('measurement', None)
+
+    all_cities = City.objects.all()
+    selected_city = None
+    if city_id is not None:
+        selected_city = City.objects.filter(id=city_id).first()
+    elif all_cities.exists():
+        selected_city = all_cities.first()
+
+    all_measurements = Measurement.objects.all()
+    selected_measurement = None
+    if measurement_id is not None:
+        selected_measurement = Measurement.objects.filter(id=measurement_id).first()
+    elif all_measurements.exists():
+        selected_measurement = all_measurements.first()
+
+    filtered_data = Data.objects.filter(station__location__city=selected_city, measurement=selected_measurement)
+    response_data = {
+        'city': selected_city.name,
+        'measurement': selected_measurement.name,
+        'values': []
+    }
+
+    total_sum = 0
+    count = 0
+    for entry in filtered_data:
+        for val in entry.values:
+            response_data['values'].append(val)
+            total_sum += val
+            count += 1
+
+    response_data['average'] = total_sum / count if count > 0 else 0
+ 
+    return JsonResponse(response_data)
 
 class RemaView(TemplateView):
     template_name = "rema.html"
